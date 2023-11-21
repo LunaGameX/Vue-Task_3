@@ -336,6 +336,36 @@ Vue.component('column3', {  //редактирование, время посл�
     },
 })
 
+Vue.component('column4', {  //проверка срока дедлайна: срок не выполнен - просроченная,
+    props: {                 //срок выполнен - выполненная в срок
+        column4: {
+            type: Array,
+            required: true,
+        },
+        card: {
+            type: Object,
+            required: true
+        }
+    },
+    template: `
+    <div class="column">
+        <h3>Выполненные задачи</h3>
+         <div class="card" v-for="card in column4">
+            <ul>
+                <li class="title"><b>Заголовок:</b> {{ card.title }}</li>
+                <li><b>Описание задачи:</b> {{ card.description }}</li>
+                <li><b>Дата создания:</b> {{ card.dateC }}</li>
+                <li><b>Дата выполнения:</b> {{ card.dateC }}</li>
+                <li><b>Дата дедлайна:</b> {{ card.dateD }}</li>
+                <li id="inTime" v-if="card.inTime">Задача выполнена в срок!</li>
+                <li id="notInTime" v-else>Задача выполнена не в срок!</li>
+            </ul>
+        </div>
+    </div>
+    `,
+    methods: {},
+})
+
 let app = new Vue({
     el: '#app',
     data: {}
