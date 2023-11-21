@@ -118,6 +118,70 @@ Vue.component('fill', {    //дата создания, заголовок, оп
     }
 })
 
+Vue.component('column1', {  //создание, удаление, редактирование карточки, время последнего редактирования
+    props: {                 // перемещение карточки во второй столбец
+        card: {
+            type: Object,
+            required: true
+        },
+        column1: {
+            type: Array,
+            required: true
+        },
+    },
+    template: `
+    <div class="column">
+        <h3>Запланированные задачи</h3>
+        <div class="card" v-for="card in column1">
+            <ul>
+                <li class="title"><b>Заголовок:</b></br> {{ card.title }}</li>
+                <li id="contexts"><b>Описание задачи:</b></br> {{ card.description }}</li>
+                <li><b>Дата дедлайна:</b></br> {{ card.dateD }}</li>
+                <li><b>Дата создания:</b></br> {{ card.dateC }}</li>
+                <li v-if="card.dateL"><b>Дата последних изменений</b></br>{{ card.dateL }}</li>
+                <button @click="updateC(card)" id="buttonUpdate">Изменить</button>
+                <button @click="deleteCard(card)" id="buttonDelete">Удалить</button>
+                <div class="change" v-if="card.updateCard">
+                    <form @submit.prevent="updateTask(card)">
+                        <p>Введите заголовок: </br>
+                            <input type="text" v-model="card.title" maxlength="30" placeholder="Заголовок">
+                        </p>
+                        <p>Добавьте описание задаче: 
+                            <textarea v-model="card.description" cols="20" rows="5"></textarea>
+                        </p>
+                        <p>Укажите дату дедлайна: 
+                            <input type="date" v-model="card.dateD">
+                        </p>
+                        <p>
+                             <input class="button" type="submit" value="Изменить карточку">
+                        </p>
+                    </form>
+                </div>
+             </ul>
+            <button @click="moving(card)" id="buttonNow">==></button>
+        </div>
+    </div>
+    `,
+    methods: {
+        deleteCard(card) {
+            this.column1.splice(this.column1.indexOf(card), 1)
+        },
+        updateC(card) {
+            card.updateCard = true
+            console.log(card.updateCard)
+        },
+        updateTask(card) {
+            this.column1.push(card)
+            this.column1.splice(this.column1.indexOf(card), 1)
+            card.dateL = new Date().toLocaleString()
+            return card.updateCard = false
+        },
+        moving(card) {
+            eventBus.$emit('moving1', card)
+        }
+    },
+})
+
 let app = new Vue({
     el: '#app',
     data: {}

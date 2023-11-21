@@ -7,6 +7,46 @@ body {
     font-family: "Times New Roman";
 }
 
+.card {
+    margin-bottom: 30px;
+    margin-top: 25px;
+    background-color: #000000;
+    border: purple solid 4px;
+    border-radius: 15px;
+    padding: 18px;
+    color: white;
+    resize: both;
+}
+
+#columns {
+    display: flex;
+}
+
+.column {
+    width: 25%;
+    text-align: center;
+    padding: 0 20px;
+    color: black;
+    border: 1px solid darkblue;
+    resize: none;
+}
+
+.change {
+    border-top: cadetblue 2px dotted;
+    margin-top: 20px;
+}
+
+ul {
+    padding: 0;
+    margin-bottom: 0px;
+}
+
+li {
+    list-style-type: none;
+    margin: 10px;
+    resize: both;
+}
+
 /*Кнопка модального окна*/
 button#buttonModal {
     padding: 9px 20px;
