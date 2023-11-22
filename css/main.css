@@ -44,6 +44,9 @@ ul {
 li {
     list-style-type: none;
     margin: 10px;
+}
+
+li#contexts {
     resize: both;
 }
 
