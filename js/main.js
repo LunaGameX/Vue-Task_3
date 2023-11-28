@@ -25,11 +25,14 @@ Vue.component('cards-kanban', {
     mounted() {
         eventBus.$on('card-create', card => {
             this.column1.push(card)
+            localStorage.setItem("column1", JSON.stringify(this.column1))
         })
         eventBus.$on('moving1', card => {
+            JSON.parse(localStorage.getItem("column1"))
             this.column2.push(card)
             this.column1.splice(this.column1.indexOf(card), 1)
-
+            localStorage.setItem("column2", JSON.stringify(this.column2))
+            localStorage.setItem("column1", JSON.stringify(this.column1))
         })
         eventBus.$on('moving2', card => {
             this.column3.push(card)
@@ -328,10 +331,11 @@ Vue.component('column3', {  //редактирование, время посл�
             this.moveBack = true
         },
         onSubmit(card) {
+            this.movingBack()
             card.reason.push(this.reason2)
             eventBus.$emit('moving3-2', card)
             this.reason2 = null
-            this.moveBack = true
+            this.moveBack = false
         }
     },
 })

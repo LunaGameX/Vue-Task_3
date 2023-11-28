@@ -22,6 +22,14 @@ body {
     display: flex;
 }
 
+#inTime {
+    color: #10ff00;
+}
+
+#notInTime {
+    color: red;
+}
+
 .column {
     width: 25%;
     text-align: center;
